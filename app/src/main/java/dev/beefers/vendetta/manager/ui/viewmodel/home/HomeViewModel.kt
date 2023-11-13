@@ -92,10 +92,10 @@ class HomeViewModel(
     }
 
     private fun autoClearCache() {
-    val currentVersion = installManager.current?.let { it.versionCode } ?: return
+    val currentVersion = installManager.current?.versionCode ?: return
     val latestVersionCode = when {
-        prefs.discordVersion.isBlank() -> discordVersions?.get(prefs.channel)?.let { it.versionCode }
-        else -> DiscordVersion.fromVersionCode(prefs.discordVersion)?.let { it.versionCode }
+        prefs.discordVersion.isBlank() -> discordVersions?.get(prefs.channel)?.versionCode
+        else -> DiscordVersion.fromVersionCode(prefs.discordVersion)?.versionCode
     } ?: return
 
     if (latestVersionCode > currentVersion) {
