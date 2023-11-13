@@ -92,17 +92,17 @@ class HomeViewModel(
     }
 
     private fun autoClearCache() {
-        val currentVersion = installManager.current?.versionCode ?: return
-        val latestVersion = when {
-            prefs.discordVersion.isBlank() -> discordVersions?.get(prefs.channel)?.versionCode
-            else -> DiscordVersion.fromVersionCode(prefs.discordVersion)?.versionCode
-        } ?: return
+    val currentVersion = installManager.current?.versionCode ?: return
+    val latestVersionCode = when {
+        prefs.discordVersion.isBlank() -> discordVersions?.get(prefs.channel)?.versionCode
+        else -> DiscordVersion.fromVersionCode(prefs.discordVersion)?.versionCode
+    } ?: return
 
-        if (latestVersion > currentVersion) {
-            for (file in (context.externalCacheDir ?: context.cacheDir).listFiles()
-                ?: emptyArray()) {
-                if (file.isDirectory) file.deleteRecursively()
-            }
-        }
-    }
+    if (latestVersionCode > currentVersion) {
+        for (file in (context.externalCacheDir ?: context.cacheDir).listFiles()
+            ?: emptyArray()) {
+            if (file.isDirectory) file.deleteRecursively()
+         }
+      }
+   }
 }
